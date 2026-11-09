@@ -8,7 +8,7 @@ Công cụ tra cứu quy hoạch đất Bình Định theo **phường/xã – t
 
 ## 🔗 Deploy
 
-- Vercel: xem `deploy_url.txt` (URL production sau khi deploy)
+- Vercel: https://binhdinh-planning-lookup.vercel.app
 - GitHub: https://github.com/shirmtry/binhdinh-planning-lookup
 
 ## 🌧️ Vấn đề (bối cảnh Bình Định – mùa mưa lũ 2026)
