@@ -1,0 +1,138 @@
+/* Tra cứu quy hoạch Bình Định – HTK 0396241674 – cập nhật 09/11/2026 */
+:root {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --brand: #0e7490;
+  --brand-dark: #155e75;
+  --danger: #dc2626;
+  --danger-bg: #fef2f2;
+  --ok: #16a34a;
+  --warn: #d97706;
+  --line: #e2e8f0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.6;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #0f172a, #155e75);
+  color: #fff; position: sticky; top: 0; z-index: 20;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; flex-wrap: wrap; }
+.brand { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.15rem; }
+.brand span { color: #67e8f9; }
+.nav-inner nav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nav-inner nav a { color: #cbd5e1; text-decoration: none; padding: 6px 10px; border-radius: 8px; font-size: 0.95rem; }
+.nav-inner nav a:hover, .nav-inner nav a.active { color: #fff; background: rgba(255,255,255,0.12); }
+.btn-hotline { background: var(--danger) !important; color: #fff !important; font-weight: 700; }
+
+/* Hero */
+.hero { padding: 28px 0 8px; }
+.hero.center { text-align: center; padding: 48px 0; }
+.badge {
+  display: inline-block; background: #fff7ed; color: #9a3412;
+  border: 1px solid #fdba74; border-radius: 999px; padding: 4px 14px;
+  font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;
+}
+h1 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); margin-bottom: 12px; color: var(--brand-dark); }
+.problem { max-width: 900px; color: #334155; }
+.mock-note {
+  margin-top: 12px; background: #fffbeb; border: 1px dashed #f59e0b;
+  padding: 8px 12px; border-radius: 8px; font-size: 0.9rem; color: #92400e;
+}
+.big-404 { font-size: 5rem; color: var(--danger); }
+
+/* Cards */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px; margin: 20px 0; box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+}
+.card h2 { font-size: 1.25rem; margin-bottom: 8px; color: var(--brand-dark); }
+.card ul { padding-left: 22px; }
+.card li { margin: 6px 0; }
+.advice { border-left: 5px solid var(--ok); }
+
+/* Search form */
+.search-form {
+  display: grid; grid-template-columns: 2fr 1.3fr 1.3fr; gap: 12px; margin-top: 14px;
+  align-items: end;
+}
+.search-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; font-weight: 600; }
+.search-form label.grow { grid-column: 1 / -1; }
+.search-form input[type="search"], .search-form select {
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px;
+  font-size: 1rem; background: #fff; width: 100%;
+}
+.search-form input:focus, .search-form select:focus { outline: 2px solid var(--brand); }
+.chk { flex-direction: row !important; align-items: center; gap: 8px !important; }
+.chk input { width: 18px; height: 18px; accent-color: var(--danger); }
+.search-form button, .btn-primary {
+  background: var(--brand); color: #fff; border: none; padding: 11px 20px;
+  border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none;
+  display: inline-block;
+}
+.search-form button:hover, .btn-primary:hover { background: var(--brand-dark); }
+.quick-tags { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 0.9rem; color: var(--muted); }
+.tag {
+  border: 1px solid var(--line); background: #f8fafc; border-radius: 999px;
+  padding: 5px 12px; cursor: pointer; font-size: 0.85rem;
+}
+.tag:hover { border-color: var(--brand); color: var(--brand); }
+.tag.danger { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); font-weight: 700; }
+
+/* Results */
+.summary { margin: 16px 0 10px; font-weight: 600; color: var(--brand-dark); }
+.alert-danger {
+  background: var(--danger-bg); border: 2px solid var(--danger); color: #991b1b;
+  border-radius: 12px; padding: 14px 16px; margin: 12px 0;
+}
+.alert-danger a { color: var(--danger); font-weight: 700; }
+.results { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin: 14px 0 26px; }
+.record {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px;
+  border-top: 5px solid var(--ok);
+}
+.record.treo { border: 2px solid var(--danger); border-top-width: 5px; background: var(--danger-bg); }
+.record.pending { border-top-color: var(--warn); }
+.record h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.record .meta { font-size: 0.88rem; color: var(--muted); margin-bottom: 8px; }
+.pill {
+  display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.78rem;
+  font-weight: 700; margin: 2px 4px 2px 0;
+}
+.pill.ok { background: #dcfce7; color: #166534; }
+.pill.warn { background: #fef3c7; color: #92400e; }
+.pill.treo { background: var(--danger); color: #fff; }
+.pill.type { background: #e0f2fe; color: #075985; }
+.record .warn-box {
+  margin-top: 10px; background: #fff; border: 1px solid var(--danger);
+  border-left: 5px solid var(--danger); color: #991b1b;
+  padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+}
+.record .note { font-size: 0.88rem; color: #475569; margin-top: 8px; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 30px; background: var(--card); border-radius: 12px; border: 1px dashed var(--line); }
+
+/* Contact */
+.contact-block { border-left: 5px solid var(--brand); }
+.contact-list { list-style: none; padding-left: 0 !important; }
+.contact-list a { color: var(--brand); }
+
+/* Footer */
+.footer { background: #0f172a; color: #cbd5e1; margin-top: 32px; padding: 22px 0; }
+.footer a { color: #67e8f9; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+.footer .small { font-size: 0.82rem; color: #94a3b8; margin-top: 6px; }
+
+/* Responsive 375px */
+@media (max-width: 640px) {
+  .search-form { grid-template-columns: 1fr; }
+  .nav-inner { justify-content: center; }
+  .results { grid-template-columns: 1fr; }
+  .card { padding: 16px; }
+}

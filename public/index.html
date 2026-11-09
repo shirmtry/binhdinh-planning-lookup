@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="HTK">
+  <meta name="contact" content="Hotline/Zalo: 0396241674 - htk.contact@gmail.com">
+  <meta name="last-updated" content="2026-11-09">
+  <meta name="description" content="Tra cứu quy hoạch đất Bình Định theo phường/xã, đường – cảnh báo quy hoạch treo. HTK 0396241674. Cập nhật 09/11/2026.">
+  <title>Tra cứu quy hoạch Bình Định 2026 – Cảnh báo quy hoạch treo | HTK</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">🗺️ QuyHoạch<span>BìnhĐịnh</span></a>
+      <nav>
+        <a href="/" class="active">Trang chủ</a>
+        <a href="/#tra-cuu">Tra cứu</a>
+        <a href="/about">Giới thiệu</a>
+        <a class="btn-hotline" href="tel:0396241674">📞 Liên hệ HTK</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="badge">🔴 Cao điểm mùa mưa lũ 2026 · Cập nhật: 09/11/2026</p>
+      <h1>Tra cứu quy hoạch đất Bình Định</h1>
+      <p class="problem">
+        Người dân Bình Định hiện rất khó tra cứu thông tin quy hoạch đất trước khi giao dịch,
+        nên nhiều gia đình lỡ mua phải đất dính <strong>quy hoạch treo</strong> kéo dài cả chục năm,
+        không được xây nhà kiên cố, không bán lại được, thậm chí mất trắng khi bị thu hồi.
+        Sau bão số 9, số 10 và đợt lũ sông Kôn tháng 11/2026, hàng loạt đồ án chỉnh trang đô thị,
+        tái định cư vùng ngập lụt và đường tránh sạt lở được công bố mới, càng dễ gây nhiễu thông tin.
+        Công cụ này giúp bà con tra cứu nhanh theo phường/xã, tuyến đường và loại đất,
+        đồng thời cảnh báo đỏ những khu vực quy hoạch treo để tránh "tiền mất tật mang".
+        Kết quả chỉ mang tính tham khảo — hãy đối chiếu hồ sơ chính thức tại cơ quan tài nguyên – môi trường.
+      </p>
+      <p class="mock-note">⚠️ Dữ liệu mô phỏng – cập nhật 09/11/2026 (không thay thế hồ sơ quy hoạch chính thức)</p>
+    </section>
+
+    <section class="card" id="tra-cuu">
+      <h2>🔎 Tra cứu quy hoạch (API Go Gin)</h2>
+      <p>Nhập phường/xã, huyện hoặc tên đường — máy chủ Go tìm trong 32 bản ghi quy hoạch mô phỏng.</p>
+      <form id="search-form" class="search-form">
+        <label class="grow">Từ khóa (phường/xã, đường…)
+          <input type="search" id="q" placeholder="VD: Quy Nhơn, Nguyễn Thái Học, Nhơn Lý…" autocomplete="off">
+        </label>
+        <label>Loại đất
+          <select id="loaiDat">
+            <option value="">Tất cả loại đất</option>
+            <option>Đất ở đô thị</option>
+            <option>Đất ở nông thôn</option>
+            <option>Đất thương mại – dịch vụ</option>
+            <option>Đất du lịch – nghỉ dưỡng</option>
+            <option>Đất khu công nghiệp</option>
+            <option>Đất nông nghiệp</option>
+            <option>Đất giao thông</option>
+            <option>Đất giáo dục</option>
+            <option>Đất cây xanh</option>
+            <option>Đất công cộng</option>
+          </select>
+        </label>
+        <label>Trạng thái quy hoạch
+          <select id="trangThai">
+            <option value="">Tất cả trạng thái</option>
+            <option>Đã phê duyệt</option>
+            <option>Đang triển khai</option>
+            <option>Đang lấy ý kiến</option>
+            <option>Điều chỉnh cục bộ</option>
+            <option>Quy hoạch treo</option>
+          </select>
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="chiTreo"> Chỉ hiện quy hoạch treo
+        </label>
+        <button type="submit">Tra cứu</button>
+      </form>
+      <div class="quick-tags">
+        Gợi ý:
+        <button type="button" class="tag" data-q="Quy Nhơn">Quy Nhơn</button>
+        <button type="button" class="tag" data-q="An Nhơn">An Nhơn</button>
+        <button type="button" class="tag" data-q="Hoài Nhơn">Hoài Nhơn</button>
+        <button type="button" class="tag" data-q="Phù Cát">Phù Cát</button>
+        <button type="button" class="tag" data-q="Tây Sơn">Tây Sơn</button>
+        <button type="button" class="tag danger" data-treo="1">⚠️ Đất quy hoạch treo</button>
+      </div>
+    </section>
+
+    <section id="ket-qua" class="results-section">
+      <div id="summary" class="summary" hidden></div>
+      <div id="treo-alert" class="alert-danger" hidden>
+        🚨 <strong>Cảnh báo quy hoạch treo!</strong> Các bản ghi nền đỏ dưới đây thuộc đồ án treo nhiều năm:
+        không được cấp phép xây dựng kiên cố, giao dịch sang tay rủi ro rất cao, có thể bị thu hồi mà chưa rõ mức bồi thường.
+        Bà con tuyệt đối kiểm tra hồ sơ pháp lý trước khi đặt cọc. Cần hỗ trợ: gọi HTK
+        <a href="tel:0396241674">0396241674</a>.
+      </div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="card advice">
+      <h2>🛡️ Kinh nghiệm tránh mua đất quy hoạch treo</h2>
+      <ul>
+        <li>Kiểm tra thông tin quy hoạch tại UBND phường/xã hoặc Phòng Tài nguyên – Môi trường trước khi đặt cọc.</li>
+        <li>Yêu cầu trích lục thửa đất, xem mục đích sử dụng và các đồ án chồng lấn.</li>
+        <li>Đồ án treo trên 3 năm không triển khai: quyền xây dựng bị hạn chế, cân nhắc kỹ.</li>
+        <li>Không tin "cò đất" hứa chạy giấy tờ — mọi cam kết phải thể hiện bằng văn bản.</li>
+        <li>Sau mưa lũ 2026, chú ý thêm hành lang thoát lũ sông Kôn và vùng nguy cơ sạt lở.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>© 2026 <a href="https://zalo.me/0396241674" target="_blank" rel="noopener">HTK</a> ·
+        Hotline/Zalo: <a href="tel:0396241674">0396241674</a> ·
+        Email: <a href="mailto:htk.contact@gmail.com">htk.contact@gmail.com</a></p>
+      <p class="small">Tra cứu quy hoạch Bình Định · Dữ liệu mô phỏng – cập nhật 09/11/2026 · Phục vụ cộng đồng mùa mưa lũ 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

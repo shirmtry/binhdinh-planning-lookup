@@ -1,0 +1,9 @@
+.vercel/
+.env
+.env.*
+!.env.example
+*.exe
+*.exe~
+*.bin
+server
+binhdinh-planning-lookup
